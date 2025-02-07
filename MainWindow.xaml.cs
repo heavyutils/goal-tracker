@@ -272,7 +272,7 @@ namespace Goal_Tracker
                     throw new FileNotFoundException($"The file '{filePath}' was not found.");
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 //MessageBox.Show($"An error occurred while loading the goals: {ex.Message}\nLoading predefined goals.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 MessageBox.Show("Welcome to the Goal Tracker! This is the perfect app to keep track of your life (or short term) goals. Right click anywhere on the blank list to get started." + Environment.NewLine + "This app is licensed under the GPL-3.0 license.", "Goal Tracker");
