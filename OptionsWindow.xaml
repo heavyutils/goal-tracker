@@ -1,0 +1,958 @@
+﻿<Window x:Class="Goal_Tracker.OptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Loaded="Window_Loaded"
+        Title="Options" Height="350" Width="400" WindowStyle="ToolWindow">
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="NoHoverButton">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="2,2" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <!-- Hover effect for border color -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF7EB4EA" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Main Content Area -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <!-- For the TabControl -->
+            <RowDefinition Height="Auto" />
+            <!-- For the Warning Text -->
+        </Grid.RowDefinitions>
+
+        <!-- Tabs for Options -->
+        <TabControl Grid.Row="0">
+            <!-- General Settings Tab -->
+            <TabItem Header="Visuals">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <StackPanel Margin="20" Orientation="Vertical">
+                        <Button Content="Presets" FontSize="18" Click="PresetButton_Click"></Button>
+                        <Separator Margin="0,10" />
+                        <!-- BG Color Section -->
+                        <Grid Margin="0,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <!-- For Label -->
+                                <ColumnDefinition Width="*" />
+                                <!-- For TextBox -->
+                                <ColumnDefinition Width="Auto" />
+                                <!-- For Color Preview -->
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Label for BG Color -->
+                            <TextBlock Text="BG Color:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+
+                            <!-- TextBox for Hex Color Input -->
+                            <TextBox Name="BgColorTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                            VerticalAlignment="Center" Grid.Column="1" TextChanged="BgColorTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #f5f5f5" FontSize="14" 
+                                            Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+
+                            <!-- Color Preview Border -->
+                            <Border Name="BgColorPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                                    VerticalAlignment="Center" Background="Gray" Grid.Column="2"/>
+                        </Grid>
+
+                        <Grid Margin="0,5,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Border Style:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+
+                            <!-- Toggle Button -->
+                            <Button Name="BorderStyleToggleButton" Content="Type A" FontSize="18" 
+                            HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="BorderStyleToggleButton_Click"
+                            Grid.Column="1">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: Type A" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                        </Grid>
+
+
+                        <!-- Separator for Border Colors -->
+                        <Separator Margin="0,10" />
+
+                        <!-- Individual Border Color Settings -->                        
+
+                        <!-- Very Easy -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Very Easy Border:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="VeryEasyBorderTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                                     VerticalAlignment="Center" Grid.Column="1" TextChanged="VeryEasyBorderTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #80d0d0" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Border Name="VeryEasyBorderPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                                    VerticalAlignment="Center" Background="Gray" Grid.Column="2"/>
+                        </Grid>
+
+                        <!-- Easy -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Easy Border:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="EasyBorderTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                                     VerticalAlignment="Center" Grid.Column="1" TextChanged="EasyBorderTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #40d080" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Border Name="EasyBorderPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                                    VerticalAlignment="Center" Background="Gray" Grid.Column="2"/>
+                        </Grid>
+
+                        <!-- Normal -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Normal Border:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="NormalBorderTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                                     VerticalAlignment="Center" Grid.Column="1" TextChanged="NormalBorderTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #40d040" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Border Name="NormalBorderPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                                    VerticalAlignment="Center" Background="Gray" Grid.Column="2"/>
+                        </Grid>
+
+                        <!-- Hard -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Hard Border:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="HardBorderTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                                     VerticalAlignment="Center" Grid.Column="1" TextChanged="HardBorderTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #f8d000" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Border Name="HardBorderPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                                    VerticalAlignment="Center" Background="Gray" Grid.Column="2"/>
+                        </Grid>
+
+                        <!-- Tough -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Tough Border:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="ToughBorderTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                                     VerticalAlignment="Center" Grid.Column="1" TextChanged="ToughBorderTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #f02800" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Border Name="ToughBorderPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                                    VerticalAlignment="Center" Background="Gray" Grid.Column="2"/>
+                        </Grid>
+
+                        <!-- Insane -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Insane Border:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="InsaneBorderTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                                     VerticalAlignment="Center" Grid.Column="1" TextChanged="InsaneBorderTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #e048f0" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Border Name="InsaneBorderPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                                    VerticalAlignment="Center" Background="Gray" Grid.Column="2"/>
+                        </Grid>
+
+                        <!-- Extreme -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Extreme Border:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="ExtremeBorderTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                                     VerticalAlignment="Center" Grid.Column="1" TextChanged="ExtremeBorderTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #8000a0" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Border Name="ExtremeBorderPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                                    VerticalAlignment="Center" Background="Gray" Grid.Column="2"/>
+                        </Grid>
+
+                        <!-- Extreme II -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Extreme II Border:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="ExtremeIIBorderTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                                     VerticalAlignment="Center" Grid.Column="1" TextChanged="ExtremeIIBorderTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #780050" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Border Name="ExtremeIIBorderPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                                    VerticalAlignment="Center" Background="Gray" Grid.Column="2"/>
+                        </Grid>
+
+                        <!-- Extreme III -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Extreme III Border:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="ExtremeIIIBorderTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                                     VerticalAlignment="Center" Grid.Column="1" TextChanged="ExtremeIIIBorderTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #70001b" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Border Name="ExtremeIIIBorderPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                                    VerticalAlignment="Center" Background="Gray" Grid.Column="2"/>
+                        </Grid>
+
+                        <!-- Impossible -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Impossible Border:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="ImpossibleBorderTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                                     VerticalAlignment="Center" Grid.Column="1" TextChanged="ImpossibleBorderTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #d35d6e" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Border Name="ImpossibleBorderPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                                    VerticalAlignment="Center" Background="Gray" Grid.Column="2"/>
+                        </Grid>
+
+                        <!-- Separator for Border Colors -->
+                        <Separator Margin="0,10" />
+
+                        <!-- Very Easy -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Very Easy Fill:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="VeryEasyFillTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                            VerticalAlignment="Center" Grid.Column="1" TextChanged="VeryEasyFillTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #a0f8f8" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Button Name="VeryEasyTColorButton" Content="T" Width="30" Height="25" FontSize="16" Margin="0,0,10,0"
+                            VerticalAlignment="Center" Grid.Column="2" Click="VeryEasyTColorButton_Click"
+                            Background="White" Foreground="Black" Style="{StaticResource NoHoverButton}">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: Black text" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                            <Border Name="VeryEasyFillPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                            VerticalAlignment="Center" Background="Gray" Grid.Column="3" />
+                        </Grid>
+
+                        <!-- Easy -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Easy Fill:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="EasyFillTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                            VerticalAlignment="Center" Grid.Column="1" TextChanged="EasyFillTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #50f8a0" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Button Name="EasyTColorButton" Content="T" Width="30" Height="25" FontSize="16" Margin="0,0,10,0"
+                            VerticalAlignment="Center" Grid.Column="2" Click="EasyTColorButton_Click"
+                            Background="White" Foreground="Black" Style="{StaticResource NoHoverButton}">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: Black text" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                            <Border Name="EasyFillPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                            VerticalAlignment="Center" Background="Gray" Grid.Column="3" />
+                        </Grid>
+
+                        <!-- Normal -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Normal Fill:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="NormalFillTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                            VerticalAlignment="Center" Grid.Column="1" TextChanged="NormalFillTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #50f862" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Button Name="NormalTColorButton" Content="T" Width="30" Height="25" FontSize="16" Margin="0,0,10,0"
+                            VerticalAlignment="Center" Grid.Column="2" Click="NormalTColorButton_Click"
+                            Background="White" Foreground="Black" Style="{StaticResource NoHoverButton}">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: Black text" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                            <Border Name="NormalFillPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                            VerticalAlignment="Center" Background="Gray" Grid.Column="3" />
+                        </Grid>
+
+                        <!-- Hard -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Hard Fill:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="HardFillTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                            VerticalAlignment="Center" Grid.Column="1" TextChanged="HardFillTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #fff840" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Button Name="HardTColorButton" Content="T" Width="30" Height="25" FontSize="16" Margin="0,0,10,0"
+                            VerticalAlignment="Center" Grid.Column="2" Click="HardTColorButton_Click"
+                            Background="White" Foreground="Black" Style="{StaticResource NoHoverButton}">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: Black text" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                            <Border Name="HardFillPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                            VerticalAlignment="Center" Background="Gray" Grid.Column="3" />
+                        </Grid>
+
+                        <!-- Tough -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Tough Fill:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="ToughFillTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                            VerticalAlignment="Center" Grid.Column="1" TextChanged="ToughFillTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #ff5046" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Button Name="ToughTColorButton" Content="T" Width="30" Height="25" FontSize="16" Margin="0,0,10,0"
+                            VerticalAlignment="Center" Grid.Column="2" Click="ToughTColorButton_Click"
+                            Background="White" Foreground="Black" Style="{StaticResource NoHoverButton}">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: Black text" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                            <Border Name="ToughFillPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                            VerticalAlignment="Center" Background="Gray" Grid.Column="3" />
+                        </Grid>
+
+                        <!-- Insane -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Insane Fill:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="InsaneFillTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                            VerticalAlignment="Center" Grid.Column="1" TextChanged="InsaneFillTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #ff5aff" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Button Name="InsaneTColorButton" Content="T" Width="30" Height="25" FontSize="16" Margin="0,0,10,0"
+                            VerticalAlignment="Center" Grid.Column="2" Click="InsaneTColorButton_Click"
+                            Background="White" Foreground="Black" Style="{StaticResource NoHoverButton}">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: Black text" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                            <Border Name="InsaneFillPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                            VerticalAlignment="Center" Background="Gray" Grid.Column="3" />
+                        </Grid>
+
+                        <!-- Extreme -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Extreme Fill:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="ExtremeFillTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                            VerticalAlignment="Center" Grid.Column="1" TextChanged="ExtremeFillTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #a000c8" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Button Name="ExtremeTColorButton" Content="T" Width="30" Height="25" FontSize="16" Margin="0,0,10,0"
+                            VerticalAlignment="Center" Grid.Column="2" Click="ExtremeTColorButton_Click"
+                            Background="Black" Foreground="White" Style="{StaticResource NoHoverButton}">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: White text" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                            <Border Name="ExtremeFillPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                            VerticalAlignment="Center" Background="Gray" Grid.Column="3" />
+                        </Grid>
+
+                        <!-- Extreme II -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Extreme II Fill:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="ExtremeIIFillTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                            VerticalAlignment="Center" Grid.Column="1" TextChanged="ExtremeIIFillTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #960062" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Button Name="ExtremeIITColorButton" Content="T" Width="30" Height="25" FontSize="16" Margin="0,0,10,0"
+                            VerticalAlignment="Center" Grid.Column="2" Click="ExtremeIITColorButton_Click"
+                            Background="Black" Foreground="White" Style="{StaticResource NoHoverButton}">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: White text" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                            <Border Name="ExtremeIIFillPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                            VerticalAlignment="Center" Background="Gray" Grid.Column="3" />
+                        </Grid>
+
+                        <!-- Extreme III -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Extreme III Fill:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="ExtremeIIIFillTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                            VerticalAlignment="Center" Grid.Column="1" TextChanged="ExtremeIIIFillTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #8c0023" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Button Name="ExtremeIIITColorButton" Content="T" Width="30" Height="25" FontSize="16" Margin="0,0,10,0"
+                            VerticalAlignment="Center" Grid.Column="2" Click="ExtremeIIITColorButton_Click"
+                            Background="Black" Foreground="White" Style="{StaticResource NoHoverButton}">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: White text" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                            <Border Name="ExtremeIIIFillPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                            VerticalAlignment="Center" Background="Gray" Grid.Column="3" />
+                        </Grid>
+
+                        <!-- Impossible -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Impossible Fill:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="ImpossibleFillTextBox" FontSize="18" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                            VerticalAlignment="Center" Grid.Column="1" TextChanged="ImpossibleFillTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: #000000" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Button Name="ImpossibleTColorButton" Content="T" Width="30" Height="25" FontSize="16" Margin="0,0,10,0"
+                            VerticalAlignment="Center" Grid.Column="2" Click="ImpossibleTColorButton_Click"
+                            Background="Black" Foreground="White" Style="{StaticResource NoHoverButton}">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: White text" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                            <Border Name="ImpossibleFillPreview" Width="50" Height="30" Margin="0,0,0,0" 
+                            VerticalAlignment="Center" Background="Gray" Grid.Column="3" />
+                        </Grid>
+                        <Separator Margin="0,10" />
+
+                        <!-- Very Easy -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Very Easy Name:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="VeryEasyName" FontSize="18" MaxLength="15" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                            VerticalAlignment="Center" Grid.Column="1" TextChanged="VeryEasyNameTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: &quot;Very Easy&quot;" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                        </Grid>
+
+                        <!-- Easy -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Easy Name:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="EasyName" FontSize="18" MaxLength="15" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                            VerticalAlignment="Center" Grid.Column="1" TextChanged="EasyNameTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: &quot;Easy&quot;" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                        </Grid>
+                        
+                        <!-- Normal -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Normal Name:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="NormalName" FontSize="18" MaxLength="15" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                            VerticalAlignment="Center" Grid.Column="1" TextChanged="NormalNameTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: &quot;Normal&quot;" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                        </Grid>
+                        
+                        <!-- Hard -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Hard Name:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="HardName" FontSize="18" MaxLength="15" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                            VerticalAlignment="Center" Grid.Column="1" TextChanged="HardNameTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: &quot;Hard&quot;" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                        </Grid>
+                        
+                        <!-- Tough -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Tough Name:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="ToughName" FontSize="18" MaxLength="15" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                            VerticalAlignment="Center" Grid.Column="1" TextChanged="ToughNameTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: &quot;Tough&quot;" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                        </Grid>
+                        
+                        <!-- Insane -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Insane Name:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="InsaneName" FontSize="18" MaxLength="15" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+                            VerticalAlignment="Center" Grid.Column="1" TextChanged="InsaneNameTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: &quot;Insane&quot;" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                        </Grid>
+                        
+                        <!-- Extreme -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Extreme Name:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="ExtremeName" FontSize="18" MaxLength="15" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+    VerticalAlignment="Center" Grid.Column="1" TextChanged="ExtremeNameTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: &quot;Extreme&quot;" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                        </Grid>
+                        
+                        <!-- Extreme II -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Extreme II Name:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="ExtremeIIName" FontSize="18" MaxLength="15" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+    VerticalAlignment="Center" Grid.Column="1" TextChanged="ExtremeIINameTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: &quot;Extreme II&quot;" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                        </Grid>
+                        
+                        <!-- Extreme III -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Extreme III Name:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="ExtremeIIIName" FontSize="18" MaxLength="15" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+    VerticalAlignment="Center" Grid.Column="1" TextChanged="ExtremeIIINameTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: &quot;Extreme III&quot;" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                        </Grid>
+                        
+                        <!-- Impossible -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Impossible Name:" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Name="ImpossibleName" FontSize="18" MaxLength="15" HorizontalAlignment="Stretch" Margin="0,0,10,0" 
+    VerticalAlignment="Center" Grid.Column="1" TextChanged="ImpossibleNameTextBox_TextChanged">
+                                <TextBox.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Text="Default: &quot;Impossible&quot;" FontSize="14" Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="General">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <StackPanel VerticalAlignment="Top">
+                        <CheckBox Name="AutoSortButton" Content="Auto Sort" Margin="10,8" Height="18" Click="AutoSortButton_Click">
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            </CheckBox.LayoutTransform>
+                            <CheckBox.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <TextBlock Text="Automatically sort all goals based on difficulty and completion.&#x0A;Default: Off" FontSize="14" 
+            Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                    </StackPanel>
+                                </ToolTip>
+                            </CheckBox.ToolTip>
+                        </CheckBox>
+
+                        <CheckBox Name="MoreTierButton" Content="Extended Difficulties" Margin="10,8" Height="18" Click="MoreTierButton_Click">
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            </CheckBox.LayoutTransform>
+                            <CheckBox.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <TextBlock Text="Allow using difficulty tiers 11-20.&#x0A;Default: Off" FontSize="14" 
+                                        Foreground="Black" TextWrapping="Wrap" Margin="-2" />
+                                    </StackPanel>
+                                </ToolTip>
+                            </CheckBox.ToolTip>
+                        </CheckBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+
+        <!-- Warning Text -->
+        <Border Grid.Row="1" Background="#FFDDDD" Padding="2">
+            <TextBlock Text="Changes will only properly take effect after restarting." 
+                       FontSize="14" TextAlignment="Center" />
+        </Border>
+    </Grid>
+</Window>

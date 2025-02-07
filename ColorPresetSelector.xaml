@@ -1,0 +1,17 @@
+﻿<Window x:Class="Goal_Tracker.ColorPresetSelector"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Goal_Tracker"
+        mc:Ignorable="d"
+        Title="ColorPresetSelector" Height="300" Width="255" WindowStyle="ToolWindow" ResizeMode="NoResize">
+    <Grid>
+        <Button Content="Colorful" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="235" Height="32" FontSize="18" Click="PresetA_Click"/>
+        <Button Content="Light" HorizontalAlignment="Center" Margin="0,47,0,0" VerticalAlignment="Top" Width="235" Height="32" FontSize="18" Click="PresetB_Click"/>
+        <Button Content="Dark" HorizontalAlignment="Center" Margin="0,84,0,0" VerticalAlignment="Top" Width="235" Height="32" FontSize="18" Click="PresetC_Click"/>
+        <Button Content="Dark+" HorizontalAlignment="Center" Margin="0,121,0,0" VerticalAlignment="Top" Width="235" Height="32" FontSize="18" Click="PresetD_Click"/>
+        <Button Content="Cancel - Return To Options" HorizontalAlignment="Center" Margin="0,0,0,8" VerticalAlignment="Bottom" Width="235" Height="24" FontSize="14" Click="Cancel_Click"/>
+
+    </Grid>
+</Window>
