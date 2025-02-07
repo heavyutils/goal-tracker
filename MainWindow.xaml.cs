@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
@@ -274,14 +274,16 @@ namespace Goal_Tracker
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while loading the goals: {ex.Message}\nLoading predefined goals.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //MessageBox.Show($"An error occurred while loading the goals: {ex.Message}\nLoading predefined goals.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Welcome to the Goal Tracker! Right click anywhere on the blank list to get started.", "Goal Tracker");
 
                 // Load predefined goals if the INI file is missing or any error occurs
                 goals = new ObservableCollection<Goal>
         {
-            new Goal { Name = "Learn WPF", Description = "Master the basics of WPF.", Difficulty = 5 },
-            new Goal { Name = "Build a Tracker", Description = "Develop a goal tracker app.", Difficulty = 10 },
-            new Goal { Name = "Skydiving", Description = "Try skydiving at least once.", Difficulty = 20 }
+                        // Old difficulties of the presets were 5, 10, 20
+            new Goal { Name = "Learn WPF", Description = "Master the basics of WPF.", Difficulty = 3 },
+            new Goal { Name = "Build a Tracker", Description = "Develop a goal tracker app.", Difficulty = 5 },
+            new Goal { Name = "Skydiving", Description = "Try skydiving at least once.", Difficulty = 8 }
         };
             }
 
