@@ -1,4 +1,4 @@
-# goal-tracker
+# Goal Tracker
 An app to track down your goals. Very customizable, many visual aspects can be easily tailored to your liking.
 
 Plans for further releases:
